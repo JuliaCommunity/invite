@@ -10,11 +10,12 @@ on: push #Used for Debug
 jobs:
   test:
     runs-on: macos-latest
+    permissions: read-all|write-all
     env:
       AIR_TABLE_KEY: ${{ secrets.AIR_TABLE_KEY }}
       AIR_TABLE_BASE: ${{ secrets.AIR_TABLE_BASE }}
       AIR_TABLE_NAME: ${{ secrets.AIR_TABLE_NAME }}
-      AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+      AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: "Checkout actions"
         uses: actions/checkout@v1.0.0
@@ -27,4 +28,4 @@ jobs:
       - name: "Build Julia project"
         uses: julia-actions/julia-buildpkg@master
       - name: "Run invite script"
-        run: julia --project src/invite.jl ${{ secrets.AIR_TABLE_KEY }} ${{ secrets.AIR_TABLE_BASE }} ${{ secrets.AIR_TABLE_NAME }} ${{ secrets.AUTH_TOKEN }}
+        run: julia --project src/invite.jl ${{ secrets.AIR_TABLE_KEY }} ${{ secrets.AIR_TABLE_BASE }} ${{ secrets.AIR_TABLE_NAME }} ${{ secrets.GITHUB_TOKEN }}
