@@ -1,5 +1,5 @@
 using GitHub
-using AirTable
+using Airtable
 
 AIR_TABLE_KEY = ARGS[1]
 AIR_TABLE_BASE = ARGS[2]
