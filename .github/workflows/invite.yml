@@ -1,0 +1,30 @@
+name: InviteToOrg
+
+# on:
+#   schedule:
+#     # * is a special character in YAML so you have to quote this string
+#     - cron:  '*/30 * * * *'
+
+on: push #Used for Debug 
+
+jobs:
+  test:
+    runs-on: macos-latest
+    env:
+      AIR_TABLE_KEY: ${{ secrets.AIR_TABLE_KEY }}
+      AIR_TABLE_BASE: ${{ secrets.AIR_TABLE_BASE }}
+      AIR_TABLE_NAME: ${{ secrets.AIR_TABLE_NAME }}
+      AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+    steps:
+      - name: "Checkout actions"
+        uses: actions/checkout@v1.0.0
+      - name: "Check PWD"
+        run: pwd
+      - name: "Setup Julia action"
+        uses: julia-actions/setup-julia@v1
+        with:
+          version: "1.7.0"
+      - name: "Build Julia project"
+        uses: julia-actions/julia-buildpkg@master
+      - name: "Run invite script"
+        run: julia --project src/invite.jl ${{ secrets.AIR_TABLE_KEY }} ${{ secrets.AIR_TABLE_BASE }} ${{ secrets.AIR_TABLE_NAME }} ${{ secrets.AUTH_TOKEN }}
