@@ -4,7 +4,6 @@ using Airtable
 AIR_TABLE_KEY = ARGS[1]
 AIR_TABLE_BASE = ARGS[2]
 AIR_TABLE_NAME = ARGS[3]
-
 AUTH_TOKEN = ARGS[4]
 
 key = Airtable.Credential(AIR_TABLE_KEY)
