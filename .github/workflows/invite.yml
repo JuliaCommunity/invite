@@ -7,7 +7,7 @@ name: InviteToOrg
 
 on: push #Used for Debug 
 
-permissions: read-all | write-all
+permissions: read-all|write-all
 
 jobs:
   test:
